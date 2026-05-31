@@ -1,0 +1,1299 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Habito Dental Clinic — วีเนียร์ รากเทียม จัดฟัน | คลินิกทันตกรรม</title>
+
+  <!-- Fonts (loaded from Google Fonts CDN) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@400;500;600;700&family=Anuphan:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    /* =====================================================================
+       HABITO DENTAL CLINIC — STYLES
+       Brand: deep navy (from the Habito logo), clinical-premium, Thai-first
+       Sections below mirror the markup order.
+       ===================================================================== */
+
+    /* ---------- DESIGN TOKENS ---------- */
+    :root {
+      /* Brand colors — Habito navy (sampled from the logo) */
+      --brand:        #3C4258;   /* deep navy (logo)          */
+      --brand-deep:   #2A2E3F;   /* hover / pressed           */
+      --pink:         #8089A8;   /* steel-blue secondary      */
+      --pink-200:     #B9BFD2;
+      --blush:        #EDEFF5;   /* soft cool surface         */
+      --blush-2:      #F3F4F9;   /* faint wash background      */
+      --mint:         #E8EBF3;   /* alt cool surface          */
+      --line-green:   #06C755;   /* LINE brand green          */
+
+      /* Ink + paper */
+      --ink:          #20242F;   /* deep cool near-black text  */
+      --ink-soft:     #5B6271;   /* muted body text           */
+      --ink-faint:    #98A0AE;   /* labels / captions         */
+      --paper:        #FCFDFF;   /* page background           */
+      --white:        #FFFFFF;
+      --hair:         rgba(32, 36, 47, .10);
+      --hair-strong:  rgba(32, 36, 47, .16);
+
+      /* Type families */
+      --display: "Prompt", system-ui, sans-serif;
+      --body:    "Anuphan", system-ui, sans-serif;
+      --mono:    "IBM Plex Mono", "Anuphan", ui-monospace, monospace;
+
+      /* Radii + shadow */
+      --r-card: 26px;
+      --r-sm:   14px;
+      --r-pill: 999px;
+      --shadow:    0 24px 60px -28px rgba(32, 36, 47, .30);
+      --shadow-sm: 0 8px 24px -14px rgba(32, 36, 47, .28);
+    }
+
+    /* ---------- BASE ---------- */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--body);
+      background: var(--paper);
+      color: var(--ink);
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+    }
+    img { max-width: 100%; display: block; }
+    em  { font-style: normal; }   /* emphasis = brand color + weight (Thai has no true italic) */
+    a   { color: inherit; text-decoration: none; }
+
+    .wrap {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 0 28px;
+    }
+    section[id] { scroll-margin-top: 92px; }
+
+    /* ---------- SHARED TYPOGRAPHY ---------- */
+    .eyebrow {
+      font-family: var(--mono);
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: var(--brand);
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .eyebrow.center::before,
+    .eyebrow.center::after {
+      content: "";
+      width: 24px;
+      height: 1px;
+      background: var(--brand);
+      opacity: .5;
+    }
+
+    .section { padding: 100px 0; }
+    .section-head {
+      max-width: 680px;
+      margin: 0 auto 56px;
+      text-align: center;
+    }
+    .section-head .eyebrow { margin-bottom: 18px; }
+    .section-title {
+      font-family: var(--display);
+      font-weight: 600;
+      font-size: clamp(32px, 4.6vw, 52px);
+      line-height: 1.06;
+      letter-spacing: -.01em;
+      color: var(--ink);
+      text-wrap: balance;
+    }
+    .section-title em { color: var(--brand); font-weight: 700; }
+    .section-sub {
+      margin-top: 18px;
+      font-size: clamp(16px, 1.4vw, 19px);
+      color: var(--ink-soft);
+      line-height: 1.6;
+      text-wrap: pretty;
+    }
+
+    /* ---------- PHOTO PLACEHOLDERS ----------
+       Swap any of these <div class="photo-placeholder"> for a real image, e.g.
+       an IMG element with: width:100%; height:100%; object-fit:cover;
+    */
+    .photo-placeholder {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 16px;
+      width: 100%;
+      height: 100%;
+      font-family: var(--mono);
+      font-size: 12px;
+      letter-spacing: .04em;
+      color: var(--ink-faint);
+      background: var(--blush);
+    }
+
+    /* ---------- BUTTONS ---------- */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      font-family: var(--body);
+      font-weight: 600;
+      font-size: 16px;
+      white-space: nowrap;
+      border: 1px solid transparent;
+      border-radius: var(--r-pill);
+      padding: 14px 26px;
+      cursor: pointer;
+      transition: transform .16s cubic-bezier(.2, .8, .2, 1),
+                  background .18s, box-shadow .18s, border-color .18s, filter .18s;
+    }
+    .btn svg { width: 18px; height: 18px; flex: none; }
+    .btn-primary {
+      background: var(--brand);
+      color: #fff;
+      box-shadow: 0 10px 24px -10px rgba(60, 66, 88, .55);
+    }
+    .btn-primary:hover  { background: var(--brand-deep); transform: translateY(-1px); }
+    .btn-primary:active { transform: scale(.98); }
+    .btn-ghost {
+      background: transparent;
+      color: var(--ink);
+      border-color: var(--hair-strong);
+    }
+    .btn-ghost:hover { border-color: var(--ink); transform: translateY(-1px); }
+    .btn-line {
+      background: var(--line-green);
+      color: #fff;
+    }
+    .btn-line:hover { filter: brightness(.94); transform: translateY(-1px); }
+    .btn-sm    { padding: 10px 18px; font-size: 14px; }
+    .btn-block { width: 100%; justify-content: center; }
+
+    /* ---------- PROMO BAR ---------- */
+    .promo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 16px;
+      padding: 9px 20px;
+      background: var(--ink);
+      color: #fff;
+      font-family: var(--mono);
+      font-size: 13px;
+      letter-spacing: .02em;
+      text-align: center;
+    }
+    .promo span { white-space: nowrap; }
+    .promo b    { color: var(--pink); font-weight: 600; }
+    .promo .dot {
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, .35);
+    }
+
+    /* ---------- NAV ---------- */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 60;
+      background: rgba(255, 252, 253, .8);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--hair);
+    }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      height: 78px;
+    }
+    .brand { display: flex; align-items: center; gap: 10px; }
+    .brand img { height: 50px; width: auto; }
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      font-size: 15px;
+      font-weight: 500;
+    }
+    .nav-links a { padding: 4px 0; transition: color .18s; }
+    .nav-links a:hover { color: var(--brand); }
+    .nav-right { display: flex; align-items: center; gap: 12px; }
+    .lang {
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: .06em;
+      color: var(--ink);
+      background: transparent;
+      border: 1px solid var(--hair-strong);
+      border-radius: var(--r-pill);
+      padding: 7px 13px;
+      cursor: pointer;
+      transition: border-color .18s, color .18s;
+    }
+    .lang:hover { border-color: var(--brand); color: var(--brand); }
+    .lang b { color: var(--brand); }
+    .hamburger {
+      display: none;
+      width: 44px;
+      height: 44px;
+      background: transparent;
+      border: 1px solid var(--hair-strong);
+      border-radius: 12px;
+      cursor: pointer;
+      align-items: center;
+      justify-content: center;
+    }
+    .hamburger svg { width: 22px; height: 22px; color: var(--ink); }
+
+    /* mobile dropdown menu */
+    .mobile-menu {
+      display: none;
+      background: var(--paper);
+      border-bottom: 1px solid var(--hair);
+    }
+    .mobile-menu.open { display: block; }
+    .mobile-menu .wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      padding-top: 14px;
+      padding-bottom: 22px;
+    }
+    .mobile-menu a {
+      padding: 13px 4px;
+      font-size: 17px;
+      font-weight: 500;
+      border-bottom: 1px solid var(--hair);
+    }
+    .mobile-menu .btn { margin-top: 14px; }
+
+    /* ---------- HERO ---------- */
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 64px 0 0;
+    }
+    .hero-glow {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(620px 420px at 50% -8%, rgba(128, 137, 168, .26), transparent 70%),
+        radial-gradient(540px 360px at 88% 4%,  rgba(60, 66, 88, .12), transparent 70%);
+    }
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+      max-width: 880px;
+      margin: 44px auto 0;
+      text-align: center;
+    }
+    .hero .eyebrow { margin-bottom: 26px; }
+    .hero .eyebrow::before,
+    .hero .eyebrow::after {
+      content: "";
+      width: 26px;
+      height: 1px;
+      background: var(--brand);
+      opacity: .5;
+    }
+    .hero-title {
+      font-family: var(--display);
+      font-weight: 600;
+      font-size: clamp(44px, 7vw, 84px);
+      line-height: 1.05;
+      letter-spacing: -.01em;
+      color: var(--ink);
+      text-wrap: balance;
+    }
+    .hero-title em { font-weight: 700; color: var(--brand); }
+    .hero-sub {
+      max-width: 600px;
+      margin: 26px auto 0;
+      font-size: clamp(17px, 1.5vw, 20px);
+      color: var(--ink-soft);
+      line-height: 1.6;
+      text-wrap: pretty;
+    }
+    .hero-cta {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 14px;
+      margin-top: 36px;
+    }
+    .trust {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 26px;
+      font-family: var(--mono);
+      font-size: 13px;
+      letter-spacing: .02em;
+      color: var(--ink-faint);
+    }
+    .trust .stars { color: var(--pink); letter-spacing: 2px; font-size: 15px; }
+    .trust .tag {
+      padding: 2px 8px;
+      border: 1px dashed var(--hair-strong);
+      border-radius: 6px;
+    }
+    .hero-media {
+      position: relative;
+      z-index: 1;
+      margin-top: 0;
+    }
+    .hero-media-panel {
+      position: relative;
+      padding: 24px;
+      border-radius: 34px;
+      background: linear-gradient(160deg, var(--blush), #DDE1EC 70%);
+      box-shadow: var(--shadow);
+    }
+    .hero-media-panel .photo-placeholder {
+      height: clamp(280px, 42vw, 500px);
+      border-radius: 22px;
+    }
+    .hero-photo {
+      display: block;
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      border-radius: 22px;
+    }
+    .smile-badge {
+      position: absolute;
+      right: 34px;
+      top: -26px;
+      z-index: 3;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 20px 12px 14px;
+      background: #fff;
+      border-radius: var(--r-pill);
+      box-shadow: var(--shadow-sm);
+    }
+    .smile-badge .ring {
+      width: 42px;
+      height: 42px;
+      flex: none;
+      border-radius: 50%;
+      background: var(--pink);
+      display: grid;
+      place-items: center;
+    }
+    .smile-badge .ring svg { width: 24px; height: 24px; color: #fff; }
+    .smile-badge .lbl {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+    }
+    .smile-badge .val {
+      font-family: var(--display);
+      font-size: 19px;
+      font-weight: 600;
+      color: var(--ink);
+    }
+
+    /* ---------- VALUE STRIP (marquee) ---------- */
+    .strip {
+      margin-top: 90px;
+      overflow: hidden;
+      background: var(--white);
+      border-top: 1px solid var(--hair);
+      border-bottom: 1px solid var(--hair);
+    }
+    .strip-track {
+      display: flex;
+      white-space: nowrap;
+      animation: marquee 32s linear infinite;
+    }
+    .strip-track:hover { animation-play-state: paused; }
+    .strip-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      padding: 20px 34px;
+      font-family: var(--display);
+      font-size: 22px;
+      color: var(--ink);
+    }
+    .strip-item .d {
+      width: 7px;
+      height: 7px;
+      flex: none;
+      border-radius: 50%;
+      background: var(--brand);
+    }
+    @keyframes marquee { to { transform: translateX(-50%); } }
+    @media (prefers-reduced-motion: reduce) {
+      .strip-track {
+        animation: none;
+        flex-wrap: wrap;
+        white-space: normal;
+        justify-content: center;
+      }
+    }
+
+    /* ---------- SERVICES ---------- */
+    #services { background: var(--paper); }
+    .svc-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 26px;
+    }
+    .svc-card {
+      display: flex;
+      flex-direction: column;
+      background: var(--white);
+      border: 1px solid var(--hair);
+      border-radius: var(--r-card);
+      overflow: hidden;
+      transition: transform .2s cubic-bezier(.2, .8, .2, 1), box-shadow .2s;
+    }
+    .svc-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+    .svc-media { padding: 18px 18px 0; }
+    .svc-media .panel {
+      border-radius: 18px;
+      overflow: hidden;
+      background: var(--blush);
+    }
+    .svc-card:nth-child(2) .svc-media .panel { background: var(--mint); }
+    .svc-card:nth-child(3) .svc-media .panel { background: #E4E7EF; }
+    .svc-media .photo-placeholder { height: 230px; }
+    .svc-body {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      padding: 24px 26px 28px;
+    }
+    .svc-body h3 {
+      font-family: var(--display);
+      font-size: 26px;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+    .svc-body p {
+      flex: 1;
+      font-size: 15px;
+      color: var(--ink-soft);
+      line-height: 1.6;
+    }
+    .svc-body .btn { margin-top: 20px; align-self: flex-start; }
+
+    /* secondary services row */
+    .svc2-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 18px;
+    }
+    .svc2 {
+      background: var(--white);
+      border: 1px solid var(--hair);
+      border-radius: 20px;
+      overflow: hidden;
+      transition: transform .2s, box-shadow .2s;
+    }
+    .svc2:hover { transform: translateY(-3px); box-shadow: var(--shadow-sm); }
+    .svc2 .photo-placeholder { height: 140px; }
+    .svc2 .b { padding: 16px 16px 20px; }
+    .svc2 h4 {
+      font-family: var(--display);
+      font-size: 19px;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+    .svc2 p { font-size: 13px; color: var(--ink-soft); line-height: 1.5; }
+
+    /* ---------- WHY US ---------- */
+    #why { background: var(--blush-2); }
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .why-card {
+      padding: 32px;
+      background: var(--white);
+      border: 1px solid var(--hair);
+      border-radius: var(--r-card);
+    }
+    .why-card .ic {
+      width: 48px;
+      height: 48px;
+      margin-bottom: 20px;
+      border-radius: 14px;
+      background: var(--blush);
+      color: var(--brand);
+      display: grid;
+      place-items: center;
+    }
+    .why-card .ic svg { width: 24px; height: 24px; }
+    .why-card h3 {
+      font-family: var(--display);
+      font-size: 23px;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+    .why-card p { font-size: 15px; color: var(--ink-soft); line-height: 1.6; }
+
+    /* ---------- TEAM ---------- */
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+    .team-card { text-align: center; }
+    .team-card .ph {
+      border-radius: var(--r-card);
+      overflow: hidden;
+      background: var(--blush);
+      border: 1px solid var(--hair);
+    }
+    .team-card:nth-child(even) .ph { background: var(--mint); }
+    .team-card .photo-placeholder { height: 300px; }
+    .team-card .ph img { width: 100%; height: 300px; object-fit: cover; object-position: center top; display: block; }
+    .team-card h3 {
+      font-family: var(--display);
+      font-size: 21px;
+      font-weight: 600;
+      margin-top: 20px;
+    }
+    .team-card .role {
+      margin-top: 6px;
+      font-family: var(--mono);
+      font-size: 12px;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      color: var(--brand);
+    }
+    .team-card .credo { margin-top: 10px; font-size: 14px; color: var(--ink-soft); }
+
+    /* ---------- GALLERY ---------- */
+    #gallery { background: var(--blush-2); }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-auto-rows: 200px;
+      gap: 16px;
+    }
+    .gallery-grid .photo-placeholder {
+      height: 100%;
+      border-radius: 18px;
+    }
+    .g-tall { grid-row: span 2; }
+    .g-wide { grid-column: span 2; }
+
+    /* ---------- REVIEWS ---------- */
+    .rev-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .rev-card {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      padding: 30px;
+      background: var(--white);
+      border: 1px solid var(--hair);
+      border-radius: var(--r-card);
+    }
+    .rev-card .stars { color: var(--pink); letter-spacing: 3px; font-size: 18px; }
+    .rev-card .quote {
+      flex: 1;
+      font-family: var(--display);
+      font-size: 20px;
+      line-height: 1.45;
+      color: var(--ink);
+    }
+    .rev-card .who {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding-top: 16px;
+      border-top: 1px solid var(--hair);
+    }
+    .rev-card .av {
+      width: 44px;
+      height: 44px;
+      flex: none;
+      border-radius: 50%;
+      background: var(--blush);
+      border: 1px solid var(--hair);
+      color: var(--brand);
+      font-family: var(--display);
+      font-weight: 600;
+      display: grid;
+      place-items: center;
+    }
+    .rev-card .nm { font-weight: 600; font-size: 15px; }
+    .rev-card .meta { font-family: var(--mono); font-size: 12px; color: var(--ink-faint); }
+
+    /* ---------- LOCATION / CONTACT ---------- */
+    #contact { background: var(--paper); }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.05fr;
+      gap: 40px;
+      align-items: stretch;
+    }
+    .contact-info { display: flex; flex-direction: column; gap: 22px; }
+    .contact-info .row { display: flex; align-items: flex-start; gap: 16px; }
+    .contact-info .ic {
+      width: 46px;
+      height: 46px;
+      flex: none;
+      border-radius: 13px;
+      background: var(--blush);
+      color: var(--brand);
+      display: grid;
+      place-items: center;
+    }
+    .contact-info .ic svg { width: 22px; height: 22px; }
+    .contact-info .lbl {
+      margin-bottom: 4px;
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+    }
+    .contact-info .val {
+      font-size: 17px;
+      font-weight: 500;
+      line-height: 1.4;
+      color: var(--ink);
+    }
+    .contact-cta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 8px;
+    }
+    .contact-map {
+      position: relative;
+      min-height: 420px;
+      border-radius: var(--r-card);
+      overflow: hidden;
+      border: 1px solid var(--hair);
+      background: var(--blush);
+    }
+    .contact-map .photo-placeholder { height: 100%; min-height: 420px; }
+    .map-pin {
+      position: absolute;
+      left: 50%;
+      top: 46%;
+      transform: translate(-50%, -50%);
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 18px;
+      background: #fff;
+      border-radius: var(--r-pill);
+      box-shadow: var(--shadow-sm);
+      font-weight: 600;
+      font-size: 14px;
+      pointer-events: none;
+    }
+    .map-pin svg { width: 18px; height: 18px; color: var(--brand); }
+
+    /* opening hours card */
+    .hours {
+      margin-top: 6px;
+      padding: 24px 26px;
+      background: var(--white);
+      border: 1px solid var(--hair);
+      border-radius: var(--r-card);
+    }
+    .hours h4 {
+      margin-bottom: 16px;
+      font-family: var(--mono);
+      font-size: 12px;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+    }
+    .hours .hr {
+      display: flex;
+      justify-content: space-between;
+      padding: 8px 0;
+      border-top: 1px solid var(--hair);
+      font-size: 15px;
+    }
+    .hours .hr:first-of-type { border-top: none; }
+    .hours .hr .d { color: var(--ink-soft); }
+    .hours .hr .t { font-family: var(--mono); font-size: 14px; color: var(--ink); }
+
+    /* ---------- FOOTER ---------- */
+    .footer {
+      padding: 72px 0 30px;
+      background: var(--ink);
+      color: #EFE6EA;
+    }
+    .footer-top {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1fr 1.2fr;
+      gap: 36px;
+      padding-bottom: 48px;
+      border-bottom: 1px solid rgba(255, 255, 255, .12);
+    }
+    .footer img.flogo { height: 78px; width: auto; margin-bottom: 18px; }
+    .footer .fdesc {
+      max-width: 280px;
+      font-size: 14px;
+      line-height: 1.6;
+      color: #C7B8C0;
+    }
+    .footer h5 {
+      margin-bottom: 18px;
+      font-family: var(--mono);
+      font-size: 12px;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--pink);
+    }
+    .footer ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 11px;
+    }
+    .footer ul a { font-size: 15px; color: #D8CCD2; transition: color .18s; }
+    .footer ul a:hover { color: #fff; }
+    .footer .social { display: flex; gap: 12px; margin-top: 8px; }
+    .footer .social a {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, .16);
+      color: #EFE6EA;
+      display: grid;
+      place-items: center;
+      transition: background .18s, border-color .18s;
+    }
+    .footer .social a:hover { background: var(--brand); border-color: var(--brand); }
+    .footer .social svg { width: 20px; height: 20px; }
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+      padding-top: 26px;
+      font-family: var(--mono);
+      font-size: 12px;
+      letter-spacing: .02em;
+      color: #9C8C94;
+    }
+
+    /* ---------- RESPONSIVE ---------- */
+    @media (max-width: 980px) {
+      .svc2-grid { grid-template-columns: repeat(3, 1fr); }
+      .team-grid { grid-template-columns: repeat(2, 1fr); }
+      .footer-top { grid-template-columns: 1fr 1fr; gap: 30px; }
+    }
+    @media (max-width: 880px) {
+      .nav-links { display: none; }
+      .nav-right .lang { display: none; }
+      .hamburger { display: inline-flex; }
+      .section { padding: 74px 0; }
+      .svc-grid { grid-template-columns: 1fr; max-width: 440px; margin: 0 auto; }
+      .why-grid { grid-template-columns: 1fr; }
+      .rev-grid { grid-template-columns: 1fr; max-width: 440px; margin: 0 auto; }
+      .contact-grid { grid-template-columns: 1fr; }
+      .gallery-grid { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 170px; }
+      .smile-badge { right: 16px; top: -22px; padding: 10px 16px 10px 12px; }
+    }
+    @media (max-width: 560px) {
+      .wrap { padding: 0 18px; }
+      .svc2-grid { grid-template-columns: 1fr 1fr; }
+      .team-grid { grid-template-columns: 1fr; max-width: 340px; margin: 0 auto; }
+      .footer-top { grid-template-columns: 1fr; }
+      .hero-cta .btn { flex: 1 1 auto; justify-content: center; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ============================================================= -->
+  <!-- PROMO BAR  (real promo / contact info)                        -->
+  <!-- ============================================================= -->
+  <div class="promo">
+    <span data-en="Veneer · Implant · Invisalign"><b>วีเนียร์</b> · <b>รากฟันเทียม</b> · <b>จัดฟันใส</b></span>
+    <span class="dot"></span>
+    <span data-en="LINE [LINE ID]">LINE <b>[LINE ID]</b></span>
+    <span class="dot"></span>
+    <span data-en="Call [phone number]">โทร [เบอร์โทรศัพท์]</span>
+  </div>
+
+  <!-- ============================================================= -->
+  <!-- NAV                                                           -->
+  <!-- ============================================================= -->
+  <header class="nav">
+    <div class="wrap nav-inner">
+      <a class="brand" href="#top"><img id="siteLogo" src="assets/habito-logo-nav.png" alt="Habito Dental Clinic"></a>
+
+      <nav class="nav-links">
+        <a href="#services" data-en="Services">บริการ</a>
+        <a href="#why"      data-en="Why us">ทำไมต้องเรา</a>
+        <a href="#team"     data-en="Our Team">ทีมหมอฟัน</a>
+        <a href="#gallery"  data-en="Gallery">บรรยากาศ</a>
+        <a href="#reviews"  data-en="Reviews">รีวิว</a>
+        <a href="#contact"  data-en="Contact">ติดต่อ</a>
+      </nav>
+
+      <div class="nav-right">
+        <button class="lang" id="langBtn"><b>TH</b> / EN</button>
+        <a class="btn btn-primary btn-sm" href="#contact" data-en="Book Appointment">จองคิว</a>
+        <button class="hamburger" id="hamBtn" aria-label="menu">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- mobile dropdown -->
+    <div class="mobile-menu" id="mobileMenu">
+      <div class="wrap">
+        <a href="#services" data-en="Services">บริการ</a>
+        <a href="#why"      data-en="Why us">ทำไมต้องเรา</a>
+        <a href="#team"     data-en="Our Team">ทีมหมอฟัน</a>
+        <a href="#gallery"  data-en="Gallery">บรรยากาศ</a>
+        <a href="#reviews"  data-en="Reviews">รีวิว</a>
+        <a href="#contact"  data-en="Contact">ติดต่อ</a>
+        <a class="btn btn-primary btn-block" href="#contact" data-en="Book Appointment">จองคิว</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============================================================= -->
+  <!-- HERO                                                          -->
+  <!-- ============================================================= -->
+  <section class="hero" id="top">
+    <div class="hero-glow"></div>
+    <div class="wrap">
+      <div class="hero-media">
+        <div class="hero-media-panel">
+          <!-- Full clinic hero banner — shown whole (uncropped). Swap assets/habito-hero.png to change it. -->
+          <img id="heroPhoto" class="hero-photo" src="assets/habito-hero.png" alt="ทีมทันตแพทย์ Habito Dental Clinic · วีเนียร์ จัดฟันใส ฟอกสีฟัน รากฟันเทียม">
+        </div>
+      </div>
+      <div class="hero-inner">
+        <span class="eyebrow" data-en="Dental clinic · [area], Bangkok">คลินิกทันตกรรม · [ย่าน] กรุงเทพฯ</span>
+        <h1 class="hero-title" data-en='Veneers, implants &amp;<br>braces — <em>all in one place</em>'>วีเนียร์ รากเทียม<br>จัดฟัน <em>ครบที่เดียว</em></h1>
+        <p class="hero-sub" data-en="Habito Dental Clinic — attentive dental care for every smile. Veneers, Invisalign, whitening, and dental implants, all in one place.">Habito Dental Clinic คลินิกทันตกรรมที่ดูแลทุกรอยยิ้มอย่างใส่ใจ ครบทั้งวีเนียร์ จัดฟันใส ฟอกสีฟัน และรากฟันเทียม ในที่เดียว</p>
+
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="#contact" data-en="Book Appointment">จองคิวออนไลน์</a>
+          <a class="btn btn-ghost" href="tel:">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            <span data-en="Call [phone number]">โทร [เบอร์โทรศัพท์]</span>
+          </a>
+          <a class="btn btn-line" href="#contact">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 5.69 2 10.23c0 4.07 3.58 7.48 8.41 8.12.33.07.78.22.89.5.1.26.07.66.03.92l-.14.86c-.04.26-.2 1.01.89.55 1.09-.46 5.86-3.45 8-5.91 1.47-1.61 2.18-3.25 2.18-5.04C22.41 5.69 17.52 2 12 2z"/></svg>
+            <span data-en="LINE [LINE ID]">LINE [LINE ID]</span>
+          </a>
+        </div>
+
+        <div class="trust">
+          <span class="stars">★★★★★</span>
+          <span class="tag" data-en="Patient reviews — add later">รีวิวคนไข้ — ใส่ภายหลัง</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- scrolling value strip -->
+    <div class="strip">
+      <div class="strip-track">
+        <span class="strip-item">วีเนียร์ · จัดฟันใส · รากฟันเทียม</span><span class="strip-item"><span class="d"></span>ใกล้ [ย่าน/สถานี]</span>
+        <span class="strip-item">ทีมทันตแพทย์เฉพาะทาง</span><span class="strip-item"><span class="d"></span>ระบบปลอดเชื้อมาตรฐาน</span>
+        <span class="strip-item">ฟอกสีฟัน · ครอบฟัน</span><span class="strip-item"><span class="d"></span>เปิดทุกวัน</span>
+        <span class="strip-item">วีเนียร์ · จัดฟันใส · รากฟันเทียม</span><span class="strip-item"><span class="d"></span>ใกล้ [ย่าน/สถานี]</span>
+        <span class="strip-item">ทีมทันตแพทย์เฉพาะทาง</span><span class="strip-item"><span class="d"></span>ระบบปลอดเชื้อมาตรฐาน</span>
+        <span class="strip-item">ฟอกสีฟัน · ครอบฟัน</span><span class="strip-item"><span class="d"></span>เปิดทุกวัน</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================= -->
+  <!-- SERVICES                                                      -->
+  <!-- ============================================================= -->
+  <section class="section" id="services">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow center" data-en="Our Services">บริการของเรา</span>
+        <h2 class="section-title" data-en="Dental care, <em>by design</em>">ทันตกรรมครบวงจร <em>ในที่เดียว</em></h2>
+        <p class="section-sub" data-en="From everyday checkups to braces and cosmetic treatments — gentle care for the whole family.">ตั้งแต่ตรวจสุขภาพฟันทั่วไป จัดฟัน ไปจนถึงทันตกรรมความงาม ดูแลอ่อนโยนสำหรับทุกคนในครอบครัว</p>
+      </div>
+
+      <!-- featured services -->
+      <div class="svc-grid">
+        <article class="svc-card">
+          <div class="svc-media"><div class="panel"><div class="photo-placeholder">รูปวีเนียร์</div></div></div>
+          <div class="svc-body">
+            <h3 data-en="Veneers">วีเนียร์</h3>
+            <p data-en="Reshape and brighten your teeth with natural-looking, custom-designed veneers.">ปรับรูปทรงและสีฟันให้สวยเป็นธรรมชาติ ออกแบบเฉพาะบุคคล</p>
+            <a class="btn btn-primary btn-sm" href="#contact" data-en="Book Now">จองคิว</a>
+          </div>
+        </article>
+
+        <article class="svc-card">
+          <div class="svc-media"><div class="panel"><div class="photo-placeholder">รูปจัดฟันใส</div></div></div>
+          <div class="svc-body">
+            <h3 data-en="Clear Aligners (Invisalign)">จัดฟันใส (Invisalign)</h3>
+            <p data-en="Discreet, removable clear aligners for a beautifully aligned smile.">จัดฟันแบบใส ถอดได้ มองแทบไม่เห็น เพื่อรอยยิ้มที่เรียงสวย</p>
+            <a class="btn btn-primary btn-sm" href="#contact" data-en="Book Now">จองคิว</a>
+          </div>
+        </article>
+
+        <article class="svc-card">
+          <div class="svc-media"><div class="panel"><div class="photo-placeholder">รูปรากฟันเทียม</div></div></div>
+          <div class="svc-body">
+            <h3 data-en="Dental Implants">รากฟันเทียม</h3>
+            <p data-en="Replace missing teeth and restore confident chewing and smiling.">ทดแทนฟันที่สูญเสียไป ให้กลับมาเคี้ยวและยิ้มได้อย่างมั่นใจ</p>
+            <a class="btn btn-primary btn-sm" href="#contact" data-en="Book Now">จองคิว</a>
+          </div>
+        </article>
+      </div>
+
+      <!-- more services -->
+      <div class="section-head" style="margin:74px auto 36px;">
+        <h2 class="section-title" style="font-size:clamp(26px,3.4vw,38px);" data-en="More dental services">บริการอื่น ๆ</h2>
+      </div>
+
+      <div class="svc2-grid">
+        <article class="svc2">
+          <div class="photo-placeholder">ฟอกสีฟัน</div>
+          <div class="b"><h4 data-en="Teeth Whitening">ฟอกสีฟัน</h4><p data-en="Safe, brighter teeth.">ฟันขาวกระจ่างใสอย่างปลอดภัย</p></div>
+        </article>
+        <article class="svc2">
+          <div class="photo-placeholder">อุดฟัน</div>
+          <div class="b"><h4 data-en="Fillings">อุดฟัน</h4><p data-en="Natural-looking fillings.">อุดฟันสีเหมือนฟันธรรมชาติ</p></div>
+        </article>
+        <article class="svc2">
+          <div class="photo-placeholder">ถอนฟัน</div>
+          <div class="b"><h4 data-en="Extractions">ถอนฟัน &amp; ฟันคุด</h4><p data-en="Gentle extractions incl. wisdom teeth.">ถอนฟันและผ่าฟันคุดอย่างนุ่มนวล</p></div>
+        </article>
+        <article class="svc2">
+          <div class="photo-placeholder">รักษารากฟัน</div>
+          <div class="b"><h4 data-en="Root Canal">รักษารากฟัน</h4><p data-en="Save your natural tooth.">เก็บรักษาฟันแท้ไว้</p></div>
+        </article>
+        <article class="svc2">
+          <div class="photo-placeholder">ขูดหินปูน</div>
+          <div class="b"><h4 data-en="Scaling">ขูดหินปูน</h4><p data-en="Deep cleaning for healthy gums.">ทำความสะอาดเพื่อเหงือกสุขภาพดี</p></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================= -->
+  <!-- WHY US                                                        -->
+  <!-- ============================================================= -->
+  <section class="section" id="why">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow center" data-en="Why Habito">ทำไมต้อง Habito</span>
+        <h2 class="section-title" data-en="Care that makes you <em>smile</em>">การดูแลที่ทำให้คุณ <em>ยิ้มได้</em></h2>
+      </div>
+
+      <div class="why-grid">
+        <div class="why-card">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+          <h3 data-en="Specialist team">ทีมเฉพาะทางครบ</h3>
+          <p data-en="Orthodontists, surgeons, and general dentists under one roof — the right expert for every need.">ทันตแพทย์เฉพาะทางจัดฟัน ศัลยกรรม และทั่วไป อยู่ในที่เดียว ดูแลได้ทุกเคส</p>
+        </div>
+        <div class="why-card">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4"/><path d="M21 12c0 5-3.5 7.5-8.5 9.5C7.5 19.5 4 17 4 12V6l8-3 8 3z"/></svg></div>
+          <h3 data-en="Clean &amp; safe">สะอาด ปลอดภัย</h3>
+          <p data-en="Modern equipment and a strict sterilization standard — your safety comes first.">เครื่องมือทันสมัยและระบบปลอดเชื้อมาตรฐาน ใส่ใจความปลอดภัยเป็นอันดับแรก</p>
+        </div>
+        <div class="why-card">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 9V5a3 3 0 0 0-6 0v4"/><rect x="5" y="9" width="14" height="11" rx="2"/></svg></div>
+          <h3 data-en="Clear consultation">ปรึกษาก่อนทุกครั้ง</h3>
+          <p data-en="We plan your treatment and explain every step clearly before we begin.">วางแผนการรักษาและอธิบายทุกขั้นตอนอย่างชัดเจนก่อนเริ่มทุกครั้ง</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================= -->
+  <!-- TEAM                                                          -->
+  <!-- ============================================================= -->
+  <section class="section" id="team">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow center" data-en="Our Team">ทีมหมอฟัน</span>
+        <h2 class="section-title" data-en="Meet our resident dentists">แนะนำทีมแพทย์ประจำ</h2>
+        <p class="section-sub" data-en="The resident dental team at Habito Dental Clinic.">ทีมทันตแพทย์ประจำ Habito Dental Clinic</p>
+      </div>
+
+      <div class="team-grid">
+        <!-- Each card: photo + name + role. Bios left blank — add real credentials when available. -->
+        <div class="team-card">
+          <div class="ph"><img src="assets/team-1-fang.png" alt="หมอฟาง"></div>
+          <h3 data-en="Dr. Fang">หมอฟาง</h3>
+          <div class="role" data-en="Resident Dentist">ทันตแพทย์ประจำคลินิก</div>
+        </div>
+        <div class="team-card">
+          <div class="ph"><img src="assets/team-2-yui.png" alt="หมอยุ้ย"></div>
+          <h3 data-en="Dr. Yui">หมอยุ้ย</h3>
+          <div class="role" data-en="Resident Dentist">ทันตแพทย์ประจำคลินิก</div>
+        </div>
+        <div class="team-card">
+          <div class="ph"><img src="assets/team-3-kang.png" alt="หมอกัง"></div>
+          <h3 data-en="Dr. Kang">หมอกัง</h3>
+          <div class="role" data-en="Resident Dentist">ทันตแพทย์ประจำคลินิก</div>
+        </div>
+        <div class="team-card">
+          <div class="ph"><img src="assets/team-4-ploy.png" alt="หมอพลอย"></div>
+          <h3 data-en="Dr. Ploy">หมอพลอย</h3>
+          <div class="role" data-en="Resident Dentist">ทันตแพทย์ประจำคลินิก</div>
+        </div>
+        <div class="team-card">
+          <div class="ph"><img src="assets/team-5-bon.png" alt="หมอบอล"></div>
+          <h3 data-en="Dr. Bon">หมอบอล</h3>
+          <div class="role" data-en="Resident Dentist">ทันตแพทย์ประจำคลินิก</div>
+        </div>
+        <div class="team-card">
+          <div class="ph"><img src="assets/team-6-gif.png" alt="หมอกี๊ฟ"></div>
+          <h3 data-en="Dr. Gif">หมอกี๊ฟ</h3>
+          <div class="role" data-en="Resident Dentist">ทันตแพทย์ประจำคลินิก</div>
+        </div>
+        <div class="team-card">
+          <div class="ph"><img src="assets/team-7-win.png" alt="หมอวิน"></div>
+          <h3 data-en="Dr. Win">หมอวิน</h3>
+          <div class="role" data-en="Resident Dentist">ทันตแพทย์ประจำคลินิก</div>
+        </div>
+        <div class="team-card">
+          <div class="ph"><img src="assets/team-8-nun.png" alt="หมอนุ่น"></div>
+          <h3 data-en="Dr. Nun">หมอนุ่น</h3>
+          <div class="role" data-en="Resident Dentist">ทันตแพทย์ประจำคลินิก</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================= -->
+  <!-- GALLERY                                                       -->
+  <!-- ============================================================= -->
+  <section class="section" id="gallery">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow center" data-en="Our Space">บรรยากาศคลินิก</span>
+        <h2 class="section-title" data-en="A calm, comfortable place">พื้นที่ที่ผ่อนคลายและสบายใจ</h2>
+      </div>
+
+      <div class="gallery-grid">
+        <div class="photo-placeholder g-tall">ภาพคลินิก</div>
+        <div class="photo-placeholder">ภาพคลินิก</div>
+        <div class="photo-placeholder g-wide">ภาพคลินิก</div>
+        <div class="photo-placeholder">ภาพคลินิก</div>
+        <div class="photo-placeholder g-wide">ภาพคลินิก</div>
+        <div class="photo-placeholder">ภาพคลินิก</div>
+        <div class="photo-placeholder">ภาพคลินิก</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================= -->
+  <!-- REVIEWS                                                       -->
+  <!-- ============================================================= -->
+  <section class="section" id="reviews">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow center" data-en="Reviews">เสียงจากคนไข้</span>
+        <h2 class="section-title" data-en="What patients say">รีวิวจากคนไข้</h2>
+        <p class="section-sub" data-en="Placeholder reviews — replace with real patient testimonials.">รีวิวตัวอย่าง — ใส่รีวิวจริงจากคนไข้ภายหลัง</p>
+      </div>
+
+      <div class="rev-grid">
+        <div class="rev-card">
+          <div class="stars">★★★★★</div>
+          <p class="quote" data-en="“Patient review goes here — a short, warm quote about their experience.”">“รีวิวคนไข้ตรงนี้ — ข้อความสั้น ๆ เกี่ยวกับประสบการณ์ที่ประทับใจ”</p>
+          <div class="who"><span class="av">A</span><div><div class="nm" data-en="[Patient name]">[ชื่อคนไข้]</div><div class="meta" data-en="Braces">จัดฟัน</div></div></div>
+        </div>
+        <div class="rev-card">
+          <div class="stars">★★★★★</div>
+          <p class="quote" data-en="“Patient review goes here — a short, warm quote about their experience.”">“รีวิวคนไข้ตรงนี้ — ข้อความสั้น ๆ เกี่ยวกับประสบการณ์ที่ประทับใจ”</p>
+          <div class="who"><span class="av">B</span><div><div class="nm" data-en="[Patient name]">[ชื่อคนไข้]</div><div class="meta" data-en="Whitening">ฟอกสีฟัน</div></div></div>
+        </div>
+        <div class="rev-card">
+          <div class="stars">★★★★★</div>
+          <p class="quote" data-en="“Patient review goes here — a short, warm quote about their experience.”">“รีวิวคนไข้ตรงนี้ — ข้อความสั้น ๆ เกี่ยวกับประสบการณ์ที่ประทับใจ”</p>
+          <div class="who"><span class="av">C</span><div><div class="nm" data-en="[Patient name]">[ชื่อคนไข้]</div><div class="meta" data-en="Implants">รากฟันเทียม</div></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================= -->
+  <!-- LOCATION / CONTACT                                            -->
+  <!-- ============================================================= -->
+  <section class="section" id="contact">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow center" data-en="Visit us">มาหาเรา</span>
+        <h2 class="section-title" data-en="Book your visit">จองคิวเข้ารับบริการ</h2>
+      </div>
+
+      <div class="contact-grid">
+        <div class="contact-info">
+          <div class="row">
+            <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></span>
+            <div><div class="lbl" data-en="Address">ที่อยู่</div><div class="val" data-en="[Clinic address] — [area], Bangkok">[ที่อยู่คลินิก] · [ย่าน] กรุงเทพฯ</div></div>
+          </div>
+          <div class="row">
+            <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span>
+            <div><div class="lbl" data-en="Phone">โทรศัพท์</div><div class="val">[เบอร์โทรศัพท์]</div></div>
+          </div>
+          <div class="row">
+            <span class="ic"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 5.69 2 10.23c0 4.07 3.58 7.48 8.41 8.12.33.07.78.22.89.5.1.26.07.66.03.92l-.14.86c-.04.26-.2 1.01.89.55 1.09-.46 5.86-3.45 8-5.91 1.47-1.61 2.18-3.25 2.18-5.04C22.41 5.69 17.52 2 12 2z"/></svg></span>
+            <div><div class="lbl" data-en="LINE Official">LINE Official</div><div class="val">[LINE ID]</div></div>
+          </div>
+
+          <div class="hours">
+            <h4 data-en="Opening hours">เวลาทำการ</h4>
+            <div class="hr"><span class="d" data-en="Mon – Fri">จันทร์ – ศุกร์</span><span class="t">[เวลาทำการ]</span></div>
+            <div class="hr"><span class="d" data-en="Sat – Sun">เสาร์ – อาทิตย์</span><span class="t">[เวลาทำการ]</span></div>
+          </div>
+
+          <div class="contact-cta">
+            <a class="btn btn-primary" href="#" data-en="Book Appointment">จองคิวออนไลน์</a>
+            <a class="btn btn-ghost" href="tel:" data-en="Call">โทรเลย</a>
+            <a class="btn btn-line" href="#">LINE</a>
+          </div>
+        </div>
+
+        <div class="contact-map">
+          <div class="map-pin"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Habito Dental Clinic · [ย่าน]</div>
+          <!-- Replace with an embedded Google Map <iframe> or a static map image -->
+          <div class="photo-placeholder">วางภาพแผนที่ / ฝัง Google Map ภายหลัง</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================= -->
+  <!-- FOOTER                                                        -->
+  <!-- ============================================================= -->
+  <footer class="footer">
+    <div class="wrap">
+      <div class="footer-top">
+        <div>
+          <img class="flogo" id="siteLogoLight" src="assets/habito-logo-light.png" alt="Habito Dental Clinic">
+          <p class="fdesc" data-en="Habito Dental Clinic — a dental clinic in [area], Bangkok. Attentive care for every smile.">Habito Dental Clinic คลินิกทันตกรรมย่าน [ย่าน] กรุงเทพฯ ดูแลทุกรอยยิ้มด้วยความใส่ใจ</p>
+        </div>
+        <div>
+          <h5 data-en="Services">บริการ</h5>
+          <ul>
+            <li><a href="#services" data-en="Veneers">วีเนียร์</a></li>
+            <li><a href="#services" data-en="Invisalign">จัดฟันใส</a></li>
+            <li><a href="#services" data-en="Implants">รากฟันเทียม</a></li>
+            <li><a href="#services" data-en="Whitening">ฟอกสีฟัน</a></li>
+          </ul>
+        </div>
+        <div>
+          <h5 data-en="Clinic">คลินิก</h5>
+          <ul>
+            <li><a href="#why" data-en="Why us">ทำไมต้องเรา</a></li>
+            <li><a href="#team" data-en="Our team">ทีมหมอฟัน</a></li>
+            <li><a href="#gallery" data-en="Gallery">บรรยากาศ</a></li>
+            <li><a href="#reviews" data-en="Reviews">รีวิว</a></li>
+          </ul>
+        </div>
+        <div>
+          <h5 data-en="Contact">ติดต่อ</h5>
+          <ul>
+            <li><a href="tel:">[เบอร์โทรศัพท์]</a></li>
+            <li><a href="#contact">LINE [LINE ID]</a></li>
+            <li data-en="[area], Bangkok">[ย่าน] กรุงเทพฯ</li>
+          </ul>
+          <div class="social">
+            <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+            <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+            <a href="#" aria-label="LINE"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 5.69 2 10.23c0 4.07 3.58 7.48 8.41 8.12.33.07.78.22.89.5.1.26.07.66.03.92l-.14.86c-.04.26-.2 1.01.89.55 1.09-.46 5.86-3.45 8-5.91 1.47-1.61 2.18-3.25 2.18-5.04C22.41 5.69 17.52 2 12 2z"/></svg></a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 Habito Dental Clinic</span>
+        <span data-en="Placeholder content — swap in real details anytime.">เนื้อหาตัวอย่าง — เปลี่ยนเป็นข้อมูลจริงได้ทุกเมื่อ</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ============================================================= -->
+  <!-- SCRIPT  (behavior + image data)                               -->
+  <!-- ============================================================= -->
+  <script>
+    /* ----- Language toggle (TH ⇄ EN) ----- */
+    // Each translatable element keeps its Thai text in the markup and its
+    // English in a data-en attribute. We snapshot the Thai once on load.
+    document.querySelectorAll("[data-en]").forEach(function (el) {
+      el.dataset.th = el.innerHTML;
+    });
+
+    var currentLang = "th";
+    var langBtn = document.getElementById("langBtn");
+
+    function applyLang() {
+      document.documentElement.lang = currentLang;
+      document.querySelectorAll("[data-en]").forEach(function (el) {
+        el.innerHTML = currentLang === "en" ? el.dataset.en : el.dataset.th;
+      });
+      if (langBtn) {
+        langBtn.innerHTML = currentLang === "en" ? "TH / <b>EN</b>" : "<b>TH</b> / EN";
+      }
+    }
+
+    if (langBtn) {
+      langBtn.addEventListener("click", function () {
+        currentLang = currentLang === "en" ? "th" : "en";
+        applyLang();
+      });
+    }
+
+    /* ----- Mobile menu ----- */
+    var hamBtn = document.getElementById("hamBtn");
+    var mobileMenu = document.getElementById("mobileMenu");
+
+    if (hamBtn) {
+      hamBtn.addEventListener("click", function () {
+        mobileMenu.classList.toggle("open");
+      });
+    }
+    if (mobileMenu) {
+      mobileMenu.querySelectorAll("a").forEach(function (link) {
+        link.addEventListener("click", function () {
+          mobileMenu.classList.remove("open");
+        });
+      });
+    }
+
+    /* Images are referenced directly via each element's src attribute
+       (see the assets/ folder). No inline base64 image data needed. */
+  </script>
+
+</body>
+</html>
